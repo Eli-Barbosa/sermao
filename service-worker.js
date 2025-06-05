@@ -1,12 +1,10 @@
-const CACHE_NAME = 'sermao-humildade-v1';
+const CACHE_NAME = 'sermao-humildade-cache-v1';
 const ASSETS = [
   '/',
   '/index.html',
   '/manifest.json',
   '/service-worker.js',
-  '/icon-192.png',
-  '/icon-512.png'
-];
+ ];
 
 self.addEventListener('install', event => {
   event.waitUntil(

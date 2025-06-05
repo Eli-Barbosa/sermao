@@ -7,10 +7,10 @@
   <title>Para a Glória de Deus – O Caminho da Humildade Contra a Contenda e a Vanglória</title>
   <!-- Meta tags para PWA -->
   <link rel="manifest" href="manifest.json">
-  <link rel="apple-touch-icon" href="icon-192.png">
-  <meta name="theme-color" content="#2c3e50">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="theme-color" content="#2c3e50">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="description" content="Sermão sobre humildade, contenda e vanglória segundo Filipenses 2.">
   <!-- Estilo -->
   <style>
@@ -455,5 +455,12 @@
         .catch(err => console.error('Erro ao registrar SW', err));
     }
   </script>
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js')
+      .then(reg => console.log('Service Worker registrado', reg))
+      .catch(err => console.error('Erro ao registrar SW', err));
+  }
+</script>
 </body>
 </html>
