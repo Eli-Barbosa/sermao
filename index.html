@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <!-- Título -->
+  <title>Para a Glória de Deus – O Caminho da Humildade Contra a Contenda e a Vanglória</title>
+  <!-- Meta tags para PWA -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <meta name="theme-color" content="#2c3e50">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="description" content="Sermão sobre humildade, contenda e vanglória segundo Filipenses 2.">
+  <!-- Estilo -->
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      margin: 10px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    h1, h2, h3 {
+      color: #2c3e50;
+      transition: color 0.3s;
+    }
+    .cronometro-container {
+      text-align: center;
+      margin-bottom: 20px;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      transition: background-color 0.3s;
+    }
+    .cronometro-container input[type="number"] {
+      width: 60px;
+      padding: 5px;
+      font-size: 16px;
+      text-align: center;
+      transition: background-color 0.3s, color 0.3s, border 0.3s;
+    }
+    .cronometro-container button {
+      padding: 6px 12px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-left: 10px;
+      background-color: #27ae60;
+      color: white;
+      border: none;
+      border-radius: 4px;
+    }
+    .cronometro-display {
+      font-size: 20px;
+      margin-top: 10px;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+    .alerta {
+      color: #e67e22;
+      font-style: italic;
+      margin-top: 10px;
+      display: none;
+    }
+    .section {
+      margin-bottom: 15px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .toggle-btn {
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding: 12px 16px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .toggle-btn:hover {
+      background-color: #2980b9;
+    }
+    .content {
+      display: none;
+      padding: 16px;
+      border-left: 4px solid #3498db;
+      font-size: 15px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    ul {
+      padding-left: 20px;
+      margin: 10px 0;
+    }
+    blockquote {
+      border-left: 4px solid #2ecc71;
+      padding-left: 10px;
+      margin: 10px 0;
+      color: #555;
+      font-style: italic;
+      transition: color 0.3s;
+    }
+    .creditos {
+      text-align: center;
+      font-size: 13px;
+      color: #666;
+      margin-top: 40px;
+      padding: 20px 10px;
+      border-top: 1px solid #ddd;
+      transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    }
+    .contatos {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 8px;
+    }
+    .contatos span {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
+    }
+    .contatos a {
+      color: #555;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .contatos a:hover {
+      text-decoration: underline;
+    }
+    /* Botão de tema com ícone de lâmpada */
+    .theme-toggle {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      z-index: 9999;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 20px;
+    }
+    @media (max-width: 600px) {
+      h1 { font-size: 20px; }
+      h2 { font-size: 18px; }
+      .toggle-btn { font-size: 15px; }
+      .content { font-size: 14px; }
+    }
+    /* Tema claro (padrão) */
+    :root {
+      --bg-body: #f5f5f5;
+      --color-text: #333;
+      --bg-section: #fff;
+      --bg-cronometro: #ecf0f1;
+      --color-title: #2c3e50;
+      --color-quote: #555;
+      --bg-footer: #f9f9f9;
+      --border-footer: #ddd;
+    }
+    /* Tema escuro */
+    .dark-mode {
+      --bg-body: #1e1e1e;
+      --color-text: #f0f0f0;
+      --bg-section: #2a2a2a;
+      --bg-cronometro: #2d2d2d;
+      --color-title: #ffffff;
+      --color-quote: #ccc;
+      --bg-footer: #252525;
+      --border-footer: #444;
+    }
+    body {
+      background-color: var(--bg-body);
+      color: var(--color-text);
+    }
+    .cronometro-container {
+      background-color: var(--bg-cronometro);
+    }
+    .content {
+      background-color: var(--bg-section);
+      color: var(--color-text);
+    }
+    h1, h2, h3 {
+      color: var(--color-title);
+    }
+    blockquote {
+      color: var(--color-quote);
+    }
+    .creditos {
+      background-color: var(--bg-footer);
+      border-top: 1px solid var(--border-footer);
+      color: #aaa;
+    }
+    .creditos strong {
+      color: var(--color-title);
+    }
+    .lampada.on {
+      filter: brightness(1.8) invert(0%);
+    }
+    .lampada.off {
+      filter: brightness(0.6) invert(0%);
+    }
+  </style>
+</head>
+<body>
+  <!-- Botão de alternância de tema com ícone textual -->
+  <button class="theme-toggle" onclick="toggleTheme()" title="Alternar tema claro/escuro">
+    <span id="lampadaIcon">💡</span>
+  </button>
+  <!-- Área do Cronômetro -->
+  <div class="cronometro-container">
+    <h2>Cronômetro para Exposição</h2>
+    <p>
+      <label for="tempoMinutos">Defina o tempo (minutos):</label>
+      <input type="number" id="tempoMinutos" min="1" value="30">
+      <button onclick="iniciarCronometro()">Iniciar</button>
+    </p>
+    <div class="cronometro-display" id="cronometro">00:00</div>
+    <div class="alerta" id="alerta">Faltam 5 minutos!</div>
+  </div>
+  <!-- Título -->
+  <h1 style="text-align:center;">Para a Glória de Deus</h1>
+  <h2 style="text-align:center;">O Caminho da Humildade Contra a Contenda e a Vanglória</h2>
+  <!-- Texto-Chave -->
+  <div class="section">
+    <button class="toggle-btn">Texto-Chave</button>
+    <div class="content">
+      <ul>
+        <li><strong>Provérbios 16:18:</strong> "A soberba precede a ruína, e a altivez do espírito, a queda."</li>
+        <li><strong>Filipenses 2:3:</strong> "Nada façais por contenda ou por vanglória, mas por humildade; cada um considere os outros superiores a si mesmo."</li>
+        <li><strong>Filipenses 2:5-8:</strong> "De sorte que haja em vós o mesmo sentimento que houve também em Cristo Jesus, que, sendo em forma de Deus, não teve por usurpação ser igual a Deus, mas aniquilou-se a si mesmo, tomando a forma de servo, fazendo-se semelhante aos homens; e, achado na forma de homem, humilhou-se a si mesmo, sendo obediente até à morte e morte de cruz."</li>
+      </ul>
+    </div>
+  </div>
+  <!-- Introdução -->
+  <div class="section">
+    <button class="toggle-btn">Introdução: O Grande Drama da Vida Humana – Quem Receberá a Glória?</button>
+    <div class="content">
+      <p><strong>Abertura:</strong> Comece com uma observação sobre a natureza humana e sua inclinação.</p>
+      <p>Pergunte: "O que nos impulsiona na vida? É o desejo de vencer a qualquer custo? De ser o centro das atenções? De provar que estamos certos ou somos melhores? Vivemos num mundo onde a competição e a autopromoção parecem ser as molas mestras."</p>
+      <p><strong>Tese:</strong> A Palavra de Deus nos confronta com a raiz desses impulsos: o ego inflado. A Bíblia nos apresenta um claro contraste entre dois caminhos: o daqueles que vivem movidos pela rivalidade (contenda) e pela busca de glória pessoal (vanglória), e o daqueles que, em humildade e abnegação, dedicam suas vidas a glorificar a Deus e a servir aos outros.</p>
+      <p>Vimos em Provérbios 16:18 o trágico fim da soberba, mas hoje nosso foco central é a exortação do apóstolo Paulo em Filipenses 2:3:</p>
+      <blockquote>"Nada façais por contenda ou por vanglória, mas por humildade; cada um considere os outros superiores a si mesmo."</blockquote>
+      <p>E a maior expressão dessa humildade encontramos em Cristo Jesus, conforme Filipenses 2:5-8.</p>
+      <p><strong>Propósito do Sermão:</strong> Hoje, vamos examinar exemplos bíblicos que ilustram o perigo da contenda e da vanglória, contrastando-os com a beleza da humildade que agrada a Deus, buscando aplicar a nós a instrução transformadora de Paulo.</p>
+    </div>
+  </div>
+  <!-- Parte I -->
+  <div class="section">
+    <button class="toggle-btn">I. O Perigo da Contenda, da Vanglória e do Orgulho Vazio (A Ruína da Soberba e da Rivalidade)</button>
+    <div class="content">
+      <p><strong>Transição:</strong> O coração humano, ferido pelo pecado, tem uma inclinação perigosa: o desejo insaciável por validação e por superioridade. Isso se manifesta de duas formas destrutivas que Filipenses 2:3 nos proíbe:</p>
+      <ul>
+        <li><strong>A. Contenda:</strong> Refere-se à rivalidade, espírito de competição, discórdia, busca por ganhar à custa do outro, e a tendência a criar divisões ou a ser opositor.</li>
+        <li><strong>B. Vanglória:</strong> É a glória vazia, a vaidade, a autopromoção, o desejo de ser louvado e o centro das atenções sem substância real ou para fins egoístas.</li>
+      </ul>
+      <h3>1. Rei Herodes Agripa I (Atos 12:21-23)</h3>
+      <ul>
+        <li><strong>Manifestação:</strong> Principalmente Vanglória e orgulho vazio. Aceita ser adorado como um deus, revelando um desejo imenso por glória pessoal e validação humana.</li>
+        <li><strong>Relato:</strong> Herodes veste-se em trajes reais, faz um discurso público, e a multidão o aclama como um deus. Ele aceita a adoração.</li>
+        <li><strong>Consequência:</strong> Imediatamente ferido por um anjo e morre comido por vermes.</li>
+        <li><strong>Mensagem:</strong> A busca por glória vazia, roubando a glória que pertence a Deus, leva à humilhação e ao juízo divino.</li>
+      </ul>
+      <h3>2. Hamã (Livro de Ester)</h3>
+      <ul>
+        <li><strong>Manifestação:</strong> Vanglória e Contenda. Seu orgulho exige reverência (vanglória) e sua ira por Mordecai não se curvar o leva a uma rivalidade mortal, culminando no plano de aniquilação dos judeus (contenda extrema).</li>
+        <li><strong>Relato:</strong> Hamã exige que todos se curvem a ele. Quando Mordecai se recusa, Hamã se enche de fúria e trama não só contra Mordecai, mas contra todo o seu povo. Vangloria-se de suas riquezas e posição, e se alegra em ser honrado publicamente.</li>
+        <li><strong>Consequência:</strong> É enforcado na mesma forca que preparou para Mordecai.</li>
+        <li><strong>Mensagem:</strong> A vanglória e o espírito de contenda, levados ao extremo, destroem a si mesmos e aos outros.</li>
+      </ul>
+      <h3>3. Rei Saul (1 Samuel 13 e 15; 1 Samuel 18:6-9)</h3>
+      <ul>
+        <li><strong>Manifestação:</strong> Contenda e Vanglória. Competiu com Samuel (sacrifício indevido) e com Deus (desobediência); sua vanglória o levou a se preocupar mais com a imagem. Sua inveja e ciúme de Davi são a perfeita ilustração de contenda.</li>
+        <li><strong>Relato:</strong> Em 1 Samuel 13, Saul desobedece a Deus oferecendo sacrifício, preocupado com o povo se dispersando. Em 1 Samuel 15, ele desobedece na guerra contra os amalequitas, preocupado com sua reputação diante do povo, pedindo a Samuel: "honra-me agora diante dos anciãos do meu povo". Em 1 Samuel 18, a canção "Saul matou os seus milhares, mas Davi os seus dez milhares" acende uma rivalidade amarga e perseguição contra Davi.</li>
+        <li><strong>Consequência:</strong> Perde o reino para sua descendência e vive em tormento devido à inveja e ao espírito de contenda.</li>
+        <li><strong>Mensagem:</strong> A rivalidade e a busca por honra pessoal corroem a liderança e a paz interior.</li>
+      </ul>
+      <h3>4. Rei Nabucodonosor (Daniel 4)</h3>
+      <ul>
+        <li><strong>Manifestação:</strong> Principalmente Vanglória e orgulho vazio. Atribui suas conquistas à sua própria majestade.</li>
+        <li><strong>Relato:</strong> No auge de seu poder, vangloria-se: "Não é esta a grande Babilônia que eu edifiquei [...] para a glória da minha majestade?"</li>
+        <li><strong>Consequência:</strong> É atingido por loucura e vive como animal, até reconhecer a soberania de Deus.</li>
+        <li><strong>Mensagem:</strong> A vanglória que rouba a glória de Deus resulta em humilhação profunda.</li>
+      </ul>
+      <h3>5. Senaqueribe, Rei da Assíria (2 Reis 18-19, Isaías 36-37)</h3>
+      <ul>
+        <li><strong>Manifestação:</strong> Contenda e Vanglória. Sua invasão e desafio a Judá e a Deus são atos de contenda; suas jactâncias sobre conquistas e poder são pura vanglória.</li>
+        <li><strong>Relato:</strong> Invade Judá, zomba do Deus de Israel e se gaba de ter conquistado todas as nações, afirmando que nenhum deus o livraria.</li>
+        <li><strong>Consequência:</strong> Seu exército é destruído por um anjo, e ele é assassinado por seus próprios filhos.</li>
+        <li><strong>Mensagem:</strong> A arrogância e a contenda contra Deus levam ao julgamento e à destruição.</li>
+      </ul>
+      <h3>Conclusão da Parte I:</h3>
+      <p>A contenda, a vanglória e o orgulho vazio são armadilhas perigosas que desviam a glória de Deus, destroem relacionamentos e levam à humilhação e à ruína.</p>
+    </div>
+  </div>
+  <!-- Parte II -->
+  <div class="section">
+    <button class="toggle-btn">II. A Beleza da Humildade, da Abnegação e da Glória a Deus (O Caminho Contra a Contenda e a Vanglória)</button>
+    <div class="content">
+      <p><strong>Transição:</strong> Em contraste gritante com a destrutividade do ego, a Bíblia nos mostra o caminho da humildade, da abnegação e da entrega total à vontade de Deus. É exatamente isso que Paulo nos exorta em Filipenses 2:3:</p>
+      <blockquote>"Nada façais por contenda ou por vanglória, mas por humildade; cada um considere os outros superiores a si mesmo."</blockquote>
+      <p>Essa é a essência do cristianismo, o antídoto para a contenda e a vanglória!</p>
+      <h3>Definição:</h3>
+      <ul>
+        <li><strong>Humildade:</strong> Reconhecimento da própria pequenez diante de Deus e dos outros, ausência de arrogância. Isso se manifesta em "considerar os outros superiores a si mesmo", combatendo a contenda.</li>
+        <li><strong>Abnegação:</strong> Renúncia dos próprios interesses em favor de Deus ou dos outros, sem buscar recompensa ou reconhecimento pessoal (combate a vanglória).</li>
+        <li><strong>Dar Glória a Deus:</strong> Atribuir todo o louvor e reconhecimento a Deus por Suas obras e bênçãos, não a si mesmo.</li>
+      </ul>
+      <h3>1. Jesus Cristo (Filipenses 2:5-8, João 5:41, João 8:50)</h3>
+      <ul>
+        <li><strong>Manifestação:</strong> A perfeita ausência de contenda e vanglória. Humilhou-se a si mesmo, serviu, obedeceu e buscou a glória do Pai, não a sua própria.</li>
+        <li><strong>Relato:</strong> Sendo Deus, esvaziou-se, tomou a forma de servo, humilhou-se e obedeceu até a morte de cruz. Recusou glória dos homens ("Eu não aceito glória dos homens"), buscando apenas a glória do Pai. Não entrou em rivalidade com ninguém, mesmo sendo constantemente provocado.</li>
+        <li><strong>Consequência:</strong> Exaltado soberanamente por Deus, a quem é dado o nome acima de todo nome.</li>
+        <li><strong>Mensagem:</strong> O modelo supremo de humildade, o antídoto perfeito para a contenda e a vanglória, que leva à verdadeira exaltação.</li>
+      </ul>
+      <h3>2. Moisés (Números 12:3)</h3>
+      <ul>
+        <li><strong>Manifestação:</strong> A total ausência de contenda e vanglória. Sua mansidão o impedia de ser rival ou buscar glória.</li>
+        <li><strong>Relato:</strong> Descrito como o homem "mais manso de toda a terra". Apesar de sua autoridade, ele consistentemente intercedia pelo povo (não por contenda), mesmo quando o criticavam, e apontava para Deus.</li>
+        <li><strong>Consequência:</strong> Foi usado poderosamente por Deus para libertar Israel e receber a Lei.</li>
+        <li><strong>Mensagem:</strong> A mansidão e a humildade preparam o coração para ser instrumento eficaz nas mãos de Deus.</li>
+      </ul>
+      <h3>3. João Batista (João 3:30, Mateus 3:11)</h3>
+      <ul>
+        <li><strong>Manifestação:</strong> Ausência de contenda e vanglória. Reconheceu a superioridade de Jesus e diminuiu-se a si mesmo.</li>
+        <li><strong>Relato:</strong> Pregou sobre Jesus: "É necessário que ele cresça e eu diminua". Considerava-se indigno de desatar a correia das sandálias de Jesus. Não entrou em rivalidade com Jesus ou Seus discípulos.</li>
+        <li><strong>Consequência:</strong> Precursor de Cristo, elogiado pelo próprio Jesus como o maior entre os nascidos de mulher.</li>
+        <li><strong>Mensagem:</strong> A verdadeira grandeza está em diminuir-se para que Cristo seja exaltado, eliminando a necessidade de vanglória ou contenda.</li>
+      </ul>
+      <h3>4. José (Gênesis 39-41)</h3>
+      <ul>
+        <li><strong>Manifestação:</strong> Ausência de contenda e vanglória. Em meio a injustiças e sucesso, ele não buscou vingança nem reconhecimento pessoal.</li>
+        <li><strong>Relato:</strong> Vendido como escravo, preso e elevado a governador do Egito. Ao interpretar os sonhos do Faraó, ele diz: "Isso não depende de mim; é Deus quem dará ao Faraó uma resposta favorável". Não se contendeu com seus irmãos quando os reencontrou, mas buscou reconciliação.</li>
+        <li><strong>Consequência:</strong> Usado por Deus para salvar sua família e muitas vidas da fome.</li>
+        <li><strong>Mensagem:</strong> A humildade e a dependência de Deus permitem uso divino em propósitos maiores, sem a necessidade de competir ou se vangloriar.</li>
+      </ul>
+      <h3>5. Apóstolo Paulo (1 Coríntios 15:9-10, Gálatas 2:20)</h3>
+      <ul>
+        <li><strong>Manifestação:</strong> Ausência de contenda e vanglória. Ele lutou contra falsos mestres, mas sempre visando a obra de Deus, nunca sua própria glória.</li>
+        <li><strong>Relato:</strong> Considerava-se "o menor dos apóstolos", indigno, mas atribuía tudo à graça de Deus. Sua vida era "Cristo em mim". Frequentemente exortava as igrejas a evitar contendas e divisões.</li>
+        <li><strong>Consequência:</strong> Usado poderosamente por Deus para evangelizar o mundo gentio, escrever parte do Novo Testamento.</li>
+        <li><strong>Mensagem:</strong> O reconhecimento da própria insuficiência e a dependência da graça de Deus são marcas de um servo fiel que evita contenda e vanglória.</li>
+      </ul>
+      <h3>Conclusão da Parte II:</h3>
+      <p>A humildade, a abnegação e a priorização da glória de Deus são o caminho para uma vida livre de contendas e vanglória, para o serviço eficaz e a exaltação divinamente concedida.</p>
+    </div>
+  </div>
+  <!-- Conclusão Final -->
+  <div class="section">
+    <button class="toggle-btn">Conclusão: Qual Caminho Você Escolherá?</button>
+    <div class="content">
+      <h3>Recapitulação:</h3>
+      <p>Vimos as consequências devastadoras do orgulho manifestado na contenda e na vanglória – a ruína, a humilhação e a divisão. E vimos a beleza e as bênçãos da humildade – a exaltação por Deus, o uso poderoso e a verdadeira glória.</p>
+      <h3>Aplicação Pessoal:</h3>
+      <ul>
+        <li><strong>Autoexame:</strong> Onde a contenda (rivalidade, espírito competitivo, discórdia) se manifesta em sua vida? Em seus relacionamentos, no trabalho, na igreja, até mesmo nas redes sociais? E onde a vanglória (busca por elogios, autopromoção, vaidade) se faz presente?</li>
+        <li><strong>Arrependimento:</strong> Peça a Deus para revelar e remover qualquer raiz de orgulho que alimente a contenda ou a vanglória. Arrependa-se de buscar a sua própria glória ou de competir com outros.</li>
+        <li><strong>Compromisso:</strong> Busque o caminho da humildade. Como Jesus, esvazie-se de si mesmo, tome a forma de servo. Aplique a instrução crucial de Filipenses 2:3 em sua vida diária:
+          <blockquote>"Nada façais por contenda ou por vanglória, mas por humildade; cada um considere os outros superiores a si mesmo."</blockquote>
+          <ul>
+            <li>Em vez de competir, colabore.</li>
+            <li>Em vez de se autopromover, promova a Deus e aos outros.</li>
+            <li>Em vez de buscar elogios, agradeça a Deus por cada conquista.</li>
+            <li>Sirva sem buscar reconhecimento.</li>
+            <li>Dê a glória a Deus por tudo.</li>
+          </ul>
+        </li>
+      </ul>
+      <h3>O Modelo Perfeito:</h3>
+      <p>Lembre-se de Jesus Cristo, o exemplo máximo de humildade. Se Ele se esvaziou, quanto mais devemos fazê-lo!</p>
+      <h3>Promessa:</h3>
+      <blockquote>"Humilhai-vos debaixo da potente mão de Deus, para que a seu tempo vos exalte" (1 Pedro 5:6). A verdadeira exaltação vem de Deus, não de nós mesmos ou dos homens.</blockquote>
+    </div>
+  </div>
+  <!-- Rodapé com créditos -->
+  <footer class="creditos">
+    <p><strong>Elaborado por Pb. Eli Ferreira Barbosa</strong></p>
+    <div class="contatos">
+      <span title="E-mail">
+        <img class="email-icon" src="https://img.icons8.com/ios-filled/20/555555/email.png"   
+             onerror="this.src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAAyCAIAAAA...'; this.onerror=null;" 
+             alt="Email"> 
+        <a href="mailto:elibarbosaspal@gmail.com">elibarbosaspal@gmail.com</a>
+      </span>
+      <span title="WhatsApp">
+        <img class="whatsapp-icon" src="https://img.icons8.com/ios-filled/20/25D366/whatsapp.png"   
+               onerror="this.src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAAAyCAIAAAA...'; this.onerror=null;"
+               alt="WhatsApp"> 
+        <a href="https://wa.me/5582999275738"   target="_blank">(82) 99927-5738</a>
+      </span>
+    </div>
+  </footer>
+  <!-- JavaScript -->
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle('dark-mode');
+      const isDark = document.body.classList.contains('dark-mode');
+      const lampada = document.getElementById('lampadaIcon');
+      lampada.textContent = isDark ? '🔆' : '💡';
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    }
+    window.onload = () => {
+      const savedTheme = localStorage.getItem('theme');
+      const lampada = document.getElementById('lampadaIcon');
+      if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        lampada.textContent = '🔆';
+      } else {
+        lampada.textContent = '💡';
+      }
+    };
+    // Função dos botões (accordion)
+    document.querySelectorAll('.toggle-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        const content = button.nextElementSibling;
+        content.style.display = content.style.display === 'block' ? 'none' : 'block';
+      });
+    });
+    // Cronômetro
+    let intervalo = null;
+    function formatarTempo(segundos) {
+      const minutos = Math.floor(segundos / 60);
+      const segs = segundos % 60;
+      return `${String(minutos).padStart(2, '0')}:${String(segs).padStart(2, '0')}`;
+    }
+    function iniciarCronometro() {
+      const minutos = parseInt(document.getElementById('tempoMinutos').value);
+      if (isNaN(minutos) || minutos <= 0) {
+        alert("Por favor, insira um número válido de minutos.");
+        return;
+      }
+      let totalSegundos = minutos * 60;
+      const cronometroDisplay = document.getElementById('cronometro');
+      const alerta = document.getElementById('alerta');
+      clearInterval(intervalo);
+      intervalo = setInterval(() => {
+        totalSegundos--;
+        cronometroDisplay.textContent = formatarTempo(totalSegundos);
+        if (totalSegundos === 300) {
+          alerta.style.display = 'block';
+        }
+        if (totalSegundos <= 0) {
+          clearInterval(intervalo);
+          cronometroDisplay.textContent = "Tempo esgotado!";
+          alert("O tempo de exposição terminou!");
+        }
+      }, 1000);
+    }
+
+    // Registro do Service Worker
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/service-worker.js')
+        .then(reg => console.log('Service Worker registrado', reg))
+        .catch(err => console.error('Erro ao registrar SW', err));
+    }
+  </script>
+</body>
+</html>
