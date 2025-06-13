@@ -1,21 +1,29 @@
 {
-  "name": "Caminho da Humildade",
-  "short_name": "Para a Glória de Deus",
-  "start_url": ".",
-  "display": "standalone",
-  "background_color": "#ffffff",
-  "description": "Sermão sobre humildade, contenda e vanglória segundo Filipenses 2.",
+  "name": "Sermão Para a Glória de Deus",
+  "short_name": "Sermão",
   "theme_color": "#2c3e50",
+  "background_color": "#f5f5f5",
+  "display": "standalone",
+  "orientation": "any",
+  "start_url": "/index.html",
   "icons": [
     {
-      "src": "icon-192.png",
+      "src": "/icon-192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "icon-512.png",
+      "src": "/icon-512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
-  ]
+  ],
+  "screenshots": [
+    "https://github.com/seu-repositorio/assets/screenshot1.png", 
+    "https://github.com/seu-repositorio/assets/screenshot2.png" 
+  ],
+  "description": "Um sermão sobre humildade, contenda e vanglória segundo Filipenses 2.",
+  "lang": "pt-BR",
+  "id": "com.eli.sermao",
+  "scope": "/"
 }
