@@ -202,6 +202,11 @@
       filter: brightness(0.6) invert(0%);
     }
   </style>
+  <!-- No final do head -->
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+
+
 </head>
 <body>
   <!-- Botão de alternância de tema com ícone textual -->
@@ -462,5 +467,7 @@
       .catch(err => console.error('Erro ao registrar SW', err));
   }
 </script>
+  <!-- Na parte inferior do body -->
+<script src="service-worker.js"></script>
 </body>
 </html>
